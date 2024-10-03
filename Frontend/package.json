@@ -1,5 +1,6 @@
 {
-  "name": "NetCompassion",
+  "homepage":"https://lionson505.github.io/lionson505",
+  "name": "netcompassion",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,6 +26,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy":"npm run build",
+    "deploy":"netcompassion -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
