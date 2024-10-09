@@ -19,7 +19,7 @@ import SchoolList from './components/SchoolList';
 import StudentList from './components/StudentList';
 import MessagingPage from './pages/MessagingPage';
 import TYouthAttendance from './pages/youthattendance'
-import TYouthAttendanceList from './pages/youthattendance'
+import TYouthAttendanceList from './pages/youthattendancelist'
 import Layout_pcd from "./components/Layout_pcd";
 import CompassionPage from "./pages/compassion";
 import UserPage from './pages/UserPage';
