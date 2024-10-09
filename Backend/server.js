@@ -7,20 +7,18 @@ const salesRoute = require("./router/sales");
 const cors = require("cors");
 const User = require("./models/users");
 const Product = require("./models/Product");
-const  youthRoute = require('./router/youth');
+const youthRoute = require('./router/youth');
 const attendanceRoute = require('./router/attendance');
 const schoolFeesRoutes = require('./router/schoolFees');
 const users = require('./router/users');
 const compassionRoutes = require('./router/compassion');
-
+require('dotenv').config(); // Load environment variables
 
 const app = express();
-const PORT =process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000; // Use the PORT from .env or default to 4000
 main();
 app.use(express.json());
 app.use(cors());
-
-
 
 // Store API
 app.use("/api/users", users);
@@ -37,19 +35,18 @@ app.use("/api/purchase", purchaseRoute);
 // Sales API
 app.use("/api/sales", salesRoute);
 
-// youth
+// Youth API
+app.use("/api/youth", youthRoute);
 
-app.use("/api/youth",youthRoute);
-// attendance
-
-app.use("/api/attendance",attendanceRoute);
+// Attendance API
+app.use("/api/attendance", attendanceRoute);
 
 // Use the school fees route
 app.use('/api/schoolFees', schoolFeesRoutes);
-//compassion
 
+// Compassion API
 app.use('/api/compassion', compassionRoutes);
-// ------------- Signin --------------
+
 // ------------- Signin --------------
 let userAuthCheck;
 app.post("/api/login", async (req, res) => {
@@ -95,20 +92,18 @@ app.post("/api/register", (req, res) => {
     .save()
     .then((result) => {
       res.status(200).send(result);
-      alert("Signup Successfull");
+      alert("Signup Successful");
     })
     .catch((err) => console.log("Signup: ", err));
   console.log("request: ", req.body);
 });
 
-
-app.get("/testget", async (req,res)=>{
-  const result = await Product.findOne({ _id: '6429979b2e5434138eda1564'})
-  res.json(result)
-
-})
+app.get("/testget", async (req, res) => {
+  const result = await Product.findOne({ _id: '6429979b2e5434138eda1564' });
+  res.json(result);
+});
 
 // Here we are listening to the server
 app.listen(PORT, () => {
-  console.log("I am live again");
+  console.log(`Server is running on port ${PORT}`);
 });
