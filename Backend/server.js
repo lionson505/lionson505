@@ -1,93 +1,115 @@
-require('dotenv').config(); // Load environment variables
 const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-
-const User = require("./models/users");
-const Product = require("./models/Product");
-
-// Import your routes
+require('dotenv').config(); // Load environment variables
+const { main } = require("./models/index");
 const productRoute = require("./router/product");
 const storeRoute = require("./router/store");
 const purchaseRoute = require("./router/purchase");
 const salesRoute = require("./router/sales");
-const youthRoute = require('./router/youth');
+const cors = require("cors");
+const User = require("./models/users");
+const Product = require("./models/Product");
+const  youthRoute = require('./router/youth');
 const attendanceRoute = require('./router/attendance');
 const schoolFeesRoutes = require('./router/schoolFees');
 const users = require('./router/users');
 const compassionRoutes = require('./router/compassion');
 
+
 const app = express();
 const PORT = process.env.PORT || 4000;
-
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(err => console.error("MongoDB connection error:", err));
-
+main();
 app.use(express.json());
 app.use(cors());
 
-// API routes
-app.use("/api/users", users);
-app.use("/api/store", storeRoute);
-app.use("/api/product", productRoute);
-app.use("/api/purchase", purchaseRoute);
-app.use("/api/sales", salesRoute);
-app.use("/api/youth", youthRoute);
-app.use("/api/attendance", attendanceRoute);
-app.use('/api/schoolFees', schoolFeesRoutes);
-app.use('/api/compassion', compassionRoutes);
 
-// ------------- Login --------------
+
+// Store API
+app.use("/api/users", users);
+
+// Store API
+app.use("/api/store", storeRoute);
+
+// Products API
+app.use("/api/product", productRoute);
+
+// Purchase API
+app.use("/api/purchase", purchaseRoute);
+
+// Sales API
+app.use("/api/sales", salesRoute);
+
+// youth
+
+app.use("/api/youth",youthRoute);
+// attendance
+
+app.use("/api/attendance",attendanceRoute);
+
+// Use the school fees route
+app.use('/api/schoolFees', schoolFeesRoutes);
+//compassion
+
+app.use('/api/compassion', compassionRoutes);
+// ------------- Signin --------------
+// ------------- Signin --------------
+let userAuthCheck;
 app.post("/api/login", async (req, res) => {
+  console.log(req.body);
   try {
-    const user = await User.findOne({ email: req.body.email });
-    if (user && await bcrypt.compare(req.body.password, user.password)) {
-      // Create a token
-      const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
-      res.json({ user, token });
+    const user = await User.findOne({
+      email: req.body.email,
+      password: req.body.password,
+    }).populate('compassion'); // Populate compassion data
+
+    console.log("USER: ", user);
+    if (user) {
+      res.send(user);
+      userAuthCheck = user;
     } else {
       res.status(401).send("Invalid Credentials");
+      userAuthCheck = null;
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
+    console.log(error);
+    res.status(500).send(error);
   }
 });
 
-// ------------- Registration API --------------
-app.post("/api/register", async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const registerUser = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: hashedPassword,
-      phoneNumber: req.body.phoneNumber,
-      imageUrl: req.body.imageUrl,
-      role: req.body.role,
-    });
-    const result = await registerUser.save();
-    res.status(201).send(result);
-  } catch (err) {
-    console.error("Signup Error: ", err);
-    res.status(500).send("Registration failed");
-  }
+// Getting User Details of logged-in user
+app.get("/api/login", (req, res) => {
+  res.send(userAuthCheck);
 });
 
-// Sample test route
-app.get("/testget", async (req, res) => {
-  try {
-    const result = await Product.findOne({ _id: '6429979b2e5434138eda1564' });
-    res.json(result);
-  } catch (error) {
-    res.status(500).send("Error fetching product");
-  }
+// Registration API
+app.post("/api/register", (req, res) => {
+  let registerUser = new User({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+    phoneNumber: req.body.phoneNumber,
+    imageUrl: req.body.imageUrl,
+    role: req.body.role,
+  });
+
+  registerUser
+    .save()
+    .then((result) => {
+      res.status(200).send(result);
+      alert("Signup Successfull");
+    })
+    .catch((err) => console.log("Signup: ", err));
+  console.log("request: ", req.body);
 });
 
-// Start the server
+
+app.get("/testget", async (req,res)=>{
+  const result = await Product.findOne({ _id: '6429979b2e5434138eda1564'})
+  res.json(result)
+
+})
+
+// Here we are listening to the server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log("I am live again");
 });
