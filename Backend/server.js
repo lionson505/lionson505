@@ -7,7 +7,6 @@ const purchaseRoute = require("./router/purchase");
 const salesRoute = require("./router/sales");
 const cors = require("cors");
 const User = require("./models/users");
-const Product = require("./models/Product");
 const  youthRoute = require('./router/youth');
 const attendanceRoute = require('./router/attendance');
 const schoolFeesRoutes = require('./router/schoolFees');
