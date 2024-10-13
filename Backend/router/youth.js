@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Youth = require('../models/youth');
+const Youth = require('../models/Youth');
 
 // Create a new youth record
 router.post('/', async (req, res) => {
