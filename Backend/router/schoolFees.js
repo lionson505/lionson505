@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const SchoolFee = require('../models/schoolFees');
+const SchoolFee = require('../models/SchoolFees');
 
 // POST route to submit school fees
 router.post('/', async (req, res) => {
