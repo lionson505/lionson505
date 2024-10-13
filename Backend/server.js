@@ -16,7 +16,7 @@ const compassionRoutes = require('./router/compassion');
 
 
 const app = express();
-const PORT = process.env.DATABASE_URL || 4000;
+const PORT = process.env.PORT || 4000;
 main();
 app.use(express.json());
 app.use(cors());
