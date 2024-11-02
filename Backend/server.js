@@ -14,7 +14,6 @@ const attendanceRoute = require('./router/attendance');
 const schoolFeesRoutes = require('./router/schoolFees');
 const users = require('./router/users');
 const compassionRoutes = require('./router/compassion');
-const africastalking = require('africastalking');
 
 const app = express();
 const PORT = 4000;
