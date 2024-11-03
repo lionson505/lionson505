@@ -16,8 +16,6 @@ const users = require('./router/users');
 const compassionRoutes = require('./router/compassion');
 
 const app = express();
-const PORT = 4000;
-// Connect to MongoDB
 const PORT = 4000 || process.env.DATABASE_URL;
 app.use(express.json());
 app.use(cors());
