@@ -64,11 +64,11 @@ const App = () => {
                     >
                         <Route index element={<Dashboard />} />
 
-                        {/* <Route path="stockreport" element={
+                        <Route path="stockreport" element={
                             <ProtectedWrapper allowedRoles={['burser']}>
                                 <StockReport />
                             </ProtectedWrapper>
-                        } /> */}
+                        } />
 
                         <Route path="inventory" element={
                             <ProtectedWrapper allowedRoles={['burser']}>
