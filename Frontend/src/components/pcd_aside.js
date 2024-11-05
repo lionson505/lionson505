@@ -11,23 +11,28 @@ function PcdMenu() {
             path: "/",
             roles: ["pd", "burser", "auditor"],
             icon: require("../assets/dashboard-icon.png")
+        },   {
+            name: "Stock",
+            path: "/stock",
+            roles: ["pd", "auditor"],
+            icon: require("../assets/dashboard-icon.png")
         },
         {
             name: "Stockin",
             path: "/stockin",
-            roles: ["burser", "auditor"],
+            roles: ["burser", ],
             icon: require("../assets/inventory-icon.png")
         },
         {
             name: "Inventory",
             path: "/inventory",
-            roles: ["pd", "burser", "auditor"],
+            roles: ["pd", "burser"],
             icon: require("../assets/inventory-icon.png")
         },
         {
             name: "Sales",
             path: "/sales",
-            roles: ["pd", "burser", "auditor"],
+            roles: [ "burser"],
             icon: require("../assets/product-sale.png")
         },
         
