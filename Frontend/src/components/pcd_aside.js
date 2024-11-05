@@ -26,7 +26,7 @@ function PcdMenu() {
         {
             name: "Inventory",
             path: "/inventory",
-            roles: ["pd", "burser"],
+            roles: ["burser"],
             icon: require("../assets/inventory-icon.png")
         },
         {
@@ -69,7 +69,7 @@ function PcdMenu() {
         {
             name: "Attendance List",
             path: "/attendancelist",
-            roles: ["pcd"],
+            roles: ["pcd","pd"],
             icon: require("../assets/attendance.png")
         },
         
