@@ -64,7 +64,7 @@ const App = () => {
                     >
                         <Route index element={<Dashboard />} />
 
-                        <Route path="stockreport" element={
+                        <Route path="stock" element={
                             <ProtectedWrapper allowedRoles={['burser','pd']}>
                                 <StockReport />
                             </ProtectedWrapper>
