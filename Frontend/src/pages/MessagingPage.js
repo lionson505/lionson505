@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
+import axios from 'axios';
 import data from '../receiver'; // Ensure this path points to your data.js file
 
 const MessagingPage = () => {
@@ -8,6 +9,7 @@ const MessagingPage = () => {
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
     // Create options for receiver types
     const receiverTypes = data.map(item => ({
@@ -28,60 +30,6 @@ const MessagingPage = () => {
         setMessage(event.target.value);
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        // Log the selected people
-        const selectedNames = selectedPeople.map(option => option.label);
-        console.log('Selected names:', selectedNames);
-
-        if (message.trim()) {
-            const receiverAddresses = selectedPeople.map(option => option.value);
-
-            // Log the receiver addresses and message
-            console.log('Receiver addresses:', receiverAddresses);
-            console.log('Message content:', message);
-
-            setLoading(true);
-            setError('');
-
-            try {
-                const response = await fetch('https://api.mtn.com/v3/sms/messages/sms/outbound', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer your-auth-token', // Replace with your token
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        senderAddress: "MTN",
-                        receiverAddress: receiverAddresses,
-                        message: message,
-                        clientCorrelatorId: "your-client-correlator-id", // Replace as needed
-                        keyword: "your-keyword", // Replace as needed
-                        serviceCode: "11221", // Adjust as needed
-                        requestDeliveryReceipt: false
-                    })
-                });
-
-                if (!response.ok) {
-                    const errorText = await response.text(); // Get the response text
-                    throw new Error(`Network response was not ok: ${errorText}`);
-                }
-
-                alert(`Message sent to: ${selectedNames.join(', ')}\nMessage: ${message}`);
-                setMessage('');
-                setSelectedPeople([]);
-            } catch (error) {
-                console.error('Error sending message:', error);
-                setError(`Failed to send message: ${error.message}`);
-            } finally {
-                setLoading(false);
-            }
-        } else {
-            alert('Please enter a message.');
-        }
-    };
-
     // Filter receivers based on selected receiver type
     const filteredReceivers = selectedReceiverType
         ? data.find(item => item.receiverType === selectedReceiverType.value)?.receivers || []
@@ -92,12 +40,45 @@ const MessagingPage = () => {
         label: person.name,
     }));
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (!selectedPeople.length || !message.trim()) {
+            setError('Please select at least one recipient and enter a message.');
+            return;
+        }
+
+        setLoading(true);
+        setError('');
+        setSuccess('');
+
+        try {
+            // Send message to backend to process SMS
+            const recipientPhones = selectedPeople.map(person => person.value); // Get the phone numbers of selected people
+            const response = await axios.post('/api/send-sms', {
+                phones: recipientPhones,
+                message: message,
+            });
+
+            // Handle success
+            setSuccess('Message sent successfully!');
+            setMessage('');
+            setSelectedPeople([]);
+        } catch (err) {
+            console.error(err);
+            setError('Failed to send the message. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="col-span-12 lg:col-span-10 flex justify-center">
             <div className="flex flex-col gap-5 w-11/12">
                 <h1 className="text-xl font-bold text-center">Select People to Message</h1>
                 <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-5">
                     {error && <div className="text-red-500">{error}</div>}
+                    {success && <div className="text-green-500">{success}</div>}
                     <div className="flex flex-col gap-4">
                         <label htmlFor="receiverTypeSelect" className="font-medium">Select Receiver Type:</label>
                         <Select
