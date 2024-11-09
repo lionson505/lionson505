@@ -1,5 +1,6 @@
 
 const express = require("express");
+const axios = require("axios");
 const { main } = require("./models/index");
 require('dotenv').config(); // Load environment variables
 const productRoute = require("./router/product");
@@ -85,6 +86,49 @@ app.post("/api/register", (req, res) => {
     })
     .catch((err) => console.log("Signup: ", err));
   console.log("request: ", req.body);
+});
+
+// ------------------ NEW SEND SMS API ------------------
+
+// Add this route to handle SMS sending requests
+app.post("/api/send-sms", async (req, res) => {
+  const { phones, message } = req.body;
+
+  // Validate that phones and message are provided
+  if (!phones || phones.length === 0 || !message) {
+    return res.status(400).json({ error: "Recipient phones and message are required" });
+  }
+
+  // Define the URL for the SMS API
+  const url = "https://www.intouchsms.co.rw/api/sendsms/.json";
+  const username = process.env.SMS_USERNAME;  // Get the username from environment variables
+  const password = process.env.SMS_PASSWORD;  // Get the password from environment variables
+
+  // Prepare the data to be sent to the SMS API
+  const data = {
+    recipient: phones.join(','),  // Join the phone numbers as a comma-separated string
+    message: message,
+  };
+
+  try {
+    // Make the POST request to the IntouchSMS API using axios
+    const response = await axios.post(url, new URLSearchParams(data), {
+      auth: {
+        username: username,  // Use basic authentication with username and password
+        password: password,
+      },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+
+    // If the API request is successful, send the response data to the client
+    res.json({ success: true, data: response.data });
+  } catch (error) {
+    console.error("Error sending SMS:", error);
+    // If there is an error, send a failure response
+    res.status(500).json({ error: "Failed to send SMS", details: error.message });
+  }
 });
 
 // Start the server
