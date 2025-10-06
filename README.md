@@ -1,12 +1,14 @@
 LionsonIQ
 
-Pioneering the Future of Technology
+Pioneering the Future of TechnologyLionsonIQ
 
 🌐 Overview
 
-LionsonIQ is a forward-thinking technology company committed to delivering innovative solutions in AI, IoT, embedded systems, data automation, and software development. By blending expertise, creativity, and passion for technology, LionsonIQ empowers organizations to streamline operations, make data-driven decisions, and thrive in a connected world.
+LionsonIQ is a forward-thinking technology company delivering innovative solutions in AI, IoT, embedded systems, data automation, and software development. By blending expertise, creativity, and passion for technology, LionsonIQ empowers organizations to streamline operations, make data-driven decisions, and thrive in a connected world.
 
-We transform real-world challenges into intelligent solutions, from predictive analytics and automated workflows to smart IoT devices and cloud platforms.
+We transform real-world challenges into intelligent solutions, including predictive analytics, automated workflows, smart IoT devices, and cloud platforms.
+
+Check My Resume
 
 🎯 Vision & Mission
 
