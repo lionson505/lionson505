@@ -8,7 +8,8 @@ LionsonIQ is a forward-thinking technology company delivering innovative solutio
 
 We transform real-world challenges into intelligent solutions, including predictive analytics, automated workflows, smart IoT devices, and cloud platforms.
 
-Check My Resume
+[View My Resume](https://docs.google.com/document/d/1uRLGWLNqj4h7SDWL2Xoqcgs1zshQ_XRN1XQkeZSxzyI/preview)
+
 
 🎯 Vision & Mission
 
