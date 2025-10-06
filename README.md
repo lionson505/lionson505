@@ -150,4 +150,55 @@ Apply innovation ethically and for meaningful societal impact.
 
 LionsonIQ is always looking to collaborate with innovators, developers, and forward-thinking organizations. Explore our projects, contribute to our open-source initiatives, or connect with our team to shape the future of technology.
 
+
+ 🎓 Education
+ 
+ - Bachelor of Software Engineering — Adventist University of Central Africa (AUCA), Kigali, Rwanda (Jan 2025 – Present)
+   - Coursework: Data Structures, Algorithms, OOP, Databases, Operating Systems, Computer Networks
+   - Activities: Google Developer Student Clubs (GDSC)
+ 
+ - Science with Software Development — G.S BUMBA TSS (Apr 2022 – Apr 2024)
+   - Grade: 88.2%
+ 
+ - Science with Computer — G.S BUMBA TSS (Jan 2021 – Dec 2022)
+   - Grade: 92.3%
+ 
+ 
+  💼 Experience
+ 
+ - Software Engineer — LionsonIQ (Jan 2024 – Present)
+   - Built automation pipelines reducing manual data entry by 80% and improving accuracy to 99%.
+   - Developed IoT monitoring dashboards improving operational visibility and saving 30% water usage in pilots.
+   - Implemented analytics pipelines and dashboards to improve forecasting accuracy by 40%.
+   - Technologies: Python, SQL, MongoDB, Pandas, NumPy, MQTT, Raspberry Pi, React
+ 
+ 
+  🛠️ Skills
+ 
+ - Languages: Python, PHP, JavaScript, TypeScript, SQL, Java, Kotlin
+ - Frameworks & Libraries: React, Next.js, Redux, Node.js, Express, Flask, Django
+ - Data & AI: Pandas, NumPy, Scikit-learn, TensorFlow, Jupyter/Colab
+ - IoT & Embedded: Arduino, Raspberry Pi, MQTT
+ - DevOps & Cloud: Docker, AWS, Nginx, Grafana, CI/CD basics
+ - Tools: Git, GitHub, Linux, VS Code, Postman, Figma
+
+
+ 🧩 Projects (Portfolio)
+
+- Automated Data Entry & Migration
+  - 80% reduction in manual work, 99% accuracy; Python + SQL + MongoDB
+- Smart Agriculture IoT Dashboard
+  - 30% less water usage; Arduino + Raspberry Pi + MQTT + Cloud
+- Retail Analytics Forecasting
+  - 25% less overstock, +40% forecast improvement; Python + Scikit-learn + Power BI
+
+
+ 📞 Contact
+
+- Email: your.email@example.com
+- LinkedIn: https://www.linkedin.com/in/your-username
+- Portfolio: https://your-portfolio.example.com
+- Resume: https://docs.google.com/document/d/1uRLGWLNqj4h7SDWL2Xoqcgs1zshQ_XRN1XQkeZSxzyI/preview
+
+
 LionsonIQ – Empowering Innovation, Transforming Industries, Enabling Impact.
